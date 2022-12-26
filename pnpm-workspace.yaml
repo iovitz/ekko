@@ -1,0 +1,5 @@
+packages:
+  # 客户端
+  - 'app'
+  # 服务端
+  - 'server'
