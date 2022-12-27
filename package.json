@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:app\"",
-    "dev:app": "npm run dev:weapp -w app",
+    "dev:app": "npm run dev:mp-weixin -w client",
     "dev:server": "npm run dev -w server",
     "prepare": "husky install",
     "clean": "lerna clean",

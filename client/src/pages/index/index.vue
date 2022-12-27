@@ -1,8 +1,15 @@
 <template>
-  <view class="content">
-    <image class="logo" src="/static/logo.png" />
-    <view class="text-area">
-      <text class="title">{{ title }} E学生</text>
+  <view class="page-container">
+    <view class="header">
+      <view class="index-tab">
+        <test class="tab-item">瞬间</test>
+        <test class="tab-item">关注</test>
+      </view>
+      <!-- <image url></image> -->
+    </view>
+    <view class="index-time-text">
+      <text class="index-date-now"> 12月13日 </text>
+      <text class="index-date-desc">我们相识的第一天</text>
     </view>
   </view>
 </template>
@@ -13,30 +20,17 @@
   const title = ref('Hello')
 </script>
 
-<style>
-  .content {
+<style lang="scss">
+  .index-time-text {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .logo {
-    height: 200rpx;
-    width: 200rpx;
-    margin-top: 200rpx;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 50rpx;
-  }
-
-  .text-area {
-    display: flex;
-    justify-content: center;
-  }
-
-  .title {
-    font-size: 36rpx;
-    color: #8f8f94;
+    .index-date-now {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    .index-date-desc {
+      font-size: 28rpx;
+      color: #90959b;
+    }
   }
 </style>
