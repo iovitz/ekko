@@ -11,12 +11,18 @@
 			"style": {
 				"navigationBarTitleText": "Touch"
 			}
+		},
+		{
+			"path": "pages/entry/index",
+			"style": {
+				"navigationBarTitleText": "Touch"
+			}
 		}
 	],
 	"globalStyle": {
-		"navigationBarTextStyle": "white",
+		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#24283B",
-		"backgroundColor": "#24283B"
+		"navigationBarBackgroundColor": "#fff",
+		"backgroundColor": "#fff"
 	}
 }
