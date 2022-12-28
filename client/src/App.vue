@@ -19,6 +19,8 @@
   .page-container {
     height: 100%;
     width: 100%;
+    background-color: $touch-color-primary;
+    color: #fff;
   }
   .page-container {
     overflow-y: scroll;
