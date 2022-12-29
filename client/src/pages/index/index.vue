@@ -3,8 +3,8 @@
     <view class="index-header">
       <text class="setting">MeNU</text>
       <view class="index-tab">
-        <view class="tab-item" :class="{active: current === 0}" @click="() => switchSwiperCurrent(0)">Moment</view>
-        <view class="tab-item" :class="{active: current === 1}" @click="() => switchSwiperCurrent(1)">Touch</view>
+        <view class="tab-item" :class="{ active: current === 0 }" @click="() => switchSwiperCurrent(0)">Moment</view>
+        <view class="tab-item" :class="{ active: current === 1 }" @click="() => switchSwiperCurrent(1)">Touch</view>
       </view>
       <text class="setting">编辑</text>
     </view>
@@ -19,7 +19,6 @@
             <text class="index-date-desc">我们相识的第22天</text>
           </view>
           <view class="index-diary-wrapper">
-
             <DiaryListVue></DiaryListVue>
           </view>
         </swiper-item>
@@ -62,7 +61,7 @@
         font-size: 32rpx;
         padding: 20rpx 10rpx;
         &.active {
-          color: red
+          color: red;
         }
       }
     }
