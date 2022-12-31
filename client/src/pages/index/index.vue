@@ -1,12 +1,14 @@
 <template>
   <view class="page-container index-page">
+    <!-- #ifdef APP-PLUS -->
+    <view :style="`height: ${systemStore.statusBarHeight * 2 + 10}rpx`"></view>
+    <!-- #endif -->
     <view class="index-header">
-      <text class="setting">MeNU</text>
       <view class="index-tab">
-        <view class="tab-item" :class="{ active: current === 0 }" @click="() => switchSwiperCurrent(0)">Moment</view>
-        <view class="tab-item" :class="{ active: current === 1 }" @click="() => switchSwiperCurrent(1)">Touch</view>
+        <view class="tab-item" :class="{ active: current === 0 }" @click="() => switchSwiperCurrent(0)">MOMENT</view>
+        <view class="tab-item" :class="{ active: current === 1 }" @click="() => switchSwiperCurrent(1)">TOUCH</view>
       </view>
-      <text class="setting">编辑</text>
+      <image src="@/static/icons/setting.png" class="index-setting-icon" @click="handleGoSetting" />
     </view>
 
     <view class="index-content">
@@ -16,7 +18,7 @@
             <text class="index-date-day">23</text>
             <text class="index-date-month"> 2022/12 </text>
             <view class="index-split-line"></view>
-            <text class="index-date-desc">我们相识的第22天</text>
+            <text class="index-date-desc">我们相识的第22天, 当前使用{{ systemStore.isApp ? 'app' : 'not app' }}</text>
           </view>
           <view class="index-diary-wrapper">
             <DiaryListVue></DiaryListVue>
@@ -30,21 +32,35 @@
 
 <script setup lang="ts">
   import { ref } from 'vue'
-  import DiaryListVue from '../../common/components/diary-list/diary-list.vue'
+  import DiaryListVue from '@/common/components/diary-list/diary-list.vue'
+  import { useSystemStore } from '@/store'
+  import { printer, phoneVibrateShort } from '@/common/utils'
 
+  const systemStore = useSystemStore()
   const current = ref(0)
 
   const handleChange = (e: any) => {
-    console.log(e)
     current.value = e.detail.current
+    phoneVibrateShort()
   }
 
-  const switchSwiperCurrent = (v: number) => {
-    current.value = v
+  const handleGoSetting = () => {
+    printer.info('前往设置')
+  }
+
+  const switchSwiperCurrent = (v: any) => {
+    const regTel = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/
+
+    if (regTel.test(v.detail.value)) {
+      console.log('电话号码符合要求')
+    } else {
+      console.log('请输入正确的电话号码')
+    }
   }
 </script>
 
 <style lang="scss">
+  @import '@/common/styles/vars.scss';
   .index-page {
     display: flex;
     flex-direction: column;
@@ -60,10 +76,15 @@
         margin-right: 30rpx;
         font-size: 32rpx;
         padding: 20rpx 10rpx;
+        color: $touch-color-weak;
         &.active {
-          color: red;
+          color: $touch-color-active;
         }
       }
+    }
+    .index-setting-icon {
+      height: 48rpx;
+      width: 48rpx;
     }
   }
   .index-time-text {
@@ -77,14 +98,14 @@
       line-height: 1;
     }
     .index-split-line {
-      border-top: 1px solid #90959b;
+      border-top: 1px solid $touch-color-weak;
       margin: 20rpx 0;
       width: 50%;
       display: inline-block;
     }
     .index-date-desc {
       font-size: 24rpx;
-      color: #90959b;
+      color: $touch-color-weak;
     }
   }
   .index-content {

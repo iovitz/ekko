@@ -1,0 +1,37 @@
+
+/* 注意要写在第一行，同时给style标签加入lang="scss"属性 */
+@import '@/uni.scss';
+@import '@/common/styles/uni.css';
+@import './vars.scss';
+
+page,
+.page-container {
+  height: 100%;
+  width: 100%;
+  background-color: $touch-color-primary;
+  color: #fff;
+}
+.page-container {
+  overflow-y: scroll;
+  box-sizing: border-box;
+  padding: 0 30rpx;
+  position: relative;
+}
+
+.serif-font,
+page, input, button, input::placeholder {
+  font-family: 'Times New Roman', Times, serif, STSong, NSimSun, SimSun, serif;
+}
+
+.touch-button {
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  &.primary {
+    background-color: $touch-color-active;
+    color: #fff;
+    &:active[aria-disabled=false] {
+      background-color: $touch-color-active-deep;
+    }
+  }
+}

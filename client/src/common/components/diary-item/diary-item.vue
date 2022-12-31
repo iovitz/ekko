@@ -6,6 +6,7 @@
 
 <style lang="scss">
   @import '@/uni.scss';
+  @import '@/common/styles/vars.scss';
   .diary-item {
     height: 220rpx;
     width: 100%;

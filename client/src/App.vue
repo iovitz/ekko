@@ -1,30 +1,18 @@
 <script setup lang="ts">
   import { onLaunch, onShow, onHide } from '@dcloudio/uni-app'
+  import { printer } from './common/utils'
 
   onLaunch(() => {
-    console.log('App Launch')
+    printer.info('平台：', uni.getSystemInfoSync().platform)
+    printer.info('高度', uni.getSystemInfoSync().statusBarHeight)
   })
   onShow(() => {
-    console.log('App Show')
+    printer.info('App Show')
   })
   onHide(() => {
-    console.log('App Hide')
+    printer.info('App Hide')
   })
 </script>
 <style lang="scss">
-  /* 注意要写在第一行，同时给style标签加入lang="scss"属性 */
-  @import '@/uni.scss';
-  @import '@/common/styles/uni.css';
-  page,
-  .page-container {
-    height: 100%;
-    width: 100%;
-    background-color: $touch-color-primary;
-    color: #fff;
-  }
-  .page-container {
-    overflow-y: scroll;
-    box-sizing: border-box;
-    padding: 0 30rpx;
-  }
+  @import '@/common/styles/global.scss';
 </style>
