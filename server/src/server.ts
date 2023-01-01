@@ -1,5 +1,4 @@
 import Koa from 'koa'
-import koaBody from 'koa-body'
 import koaCros from 'koa2-cors'
 import koaBodyparser from 'koa-bodyparser'
 import appConfig from './config/app_config'

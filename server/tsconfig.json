@@ -3,6 +3,8 @@
     "target": "es6",
     // 因为node是commonJS
     "module": "CommonJS",
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
     "declaration": false,
     "lib": ["esnext", "dom"],
     "baseUrl": ".",

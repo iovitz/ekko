@@ -1,11 +1,13 @@
 import 'reflect-metadata'
 import KoaRouter from 'koa-router'
 import { Context, ParameterizedContext } from 'koa'
+import appConfig from '@/config/app_config'
 
 type MethodType = 'get' | 'post' | 'put' | 'patch' | 'delete'
 
+const { global_router_prefix: globalRouterPrefix } = appConfig.getConfig()
 export const rootRouter = new KoaRouter({
-  prefix: '/api'
+  prefix: globalRouterPrefix
 })
 
 export interface KoaContext<TParams extends {} = {}, TBody = any, TData = any> extends Context {

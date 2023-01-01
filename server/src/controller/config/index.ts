@@ -1,7 +1,6 @@
 import { Context } from 'vm'
-import { Controller, Get } from '@/utils/koa_request'
-import { fieldDao } from '@/model/dao/field.dao'
 import { STS } from 'ali-oss'
+import { Controller, Get } from '@/utils/koa_request'
 import appConfig from '@/config/app_config'
 
 const config = appConfig.getConfig()
@@ -9,7 +8,7 @@ const config = appConfig.getConfig()
 export class ConfigController {
   @Get('/ali_oss_secirity_token')
   async register(ctx: Context) {
-    let sts = new STS({
+    const sts = new STS({
       // 填写步骤1创建的RAM用户AccessKey。
       accessKeyId: config.aliyun_accessKeyId,
       accessKeySecret: config.aliyun_accessKeySecret
