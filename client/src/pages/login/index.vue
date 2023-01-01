@@ -5,22 +5,18 @@
     <!-- #endif -->
     <view class="entry-title">TOUCH</view>
     <view :class="`entry-phone ${isInputFocus ? 'active' : ''}`">
-      <text class="entry-phone-type">+86</text>
       <input
         v-model="phoneNumber"
         type="number"
-        :maxlength="11"
-        placeholder="Phone Number"
+        :maxlength="4"
+        placeholder="Verify Code"
         class="entry-phone-inputer serif-font"
         placeholder-class="serif-font"
         @focus="() => handleInputStatusChange(true)"
         @blur="() => handleInputStatusChange(false)"
-        @input="handleInput"
       />
     </view>
-    <button :disabled="isButtonDisabled" class="touch-button primary entry-send-button" @click="handleSendCode">Send Code</button>
-    <view class="entry-auto-login-tip">Automatic registration after verification of unregistered mobile phones</view>
-    <view class="entry-test-login" @click="handleTestLogin">随机测试账号登录</view>
+    <button :disabled="isButtonDisabled" class="touch-button primary entry-send-button">Confirm</button>
   </view>
 </template>
 
@@ -34,24 +30,6 @@
   const isButtonDisabled = ref(true)
   const handleInputStatusChange = (v: boolean) => {
     isInputFocus.value = false
-  }
-  const handleInput = (v: any) => {
-    const regTel = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/
-
-    if (regTel.test(v.detail.value)) {
-      isButtonDisabled.value = false
-    } else {
-      isButtonDisabled.value = true
-    }
-  }
-  const handleSendCode = () => {
-    console.log('发送验证码')
-    uni.navigateTo({
-      url: '/pages/login/index'
-    })
-  }
-  const handleTestLogin = () => {
-    console.log('测试登录')
   }
 </script>
 
@@ -71,8 +49,8 @@
     border-bottom: 1px solid $touch-color-weak;
     width: 550rpx;
     margin: 100rpx auto 0;
-    padding-bottom: 10rpx;
     transition: all ease 300ms;
+    padding-bottom: 10rpx;
     &.active {
       border-color: #fff;
     }
@@ -83,8 +61,8 @@
   .entry-phone-inputer {
     width: 400rpx;
     font-size: 48rpx;
+    text-align: center;
   }
-  .entry-auto-login-tip,
   .entry-send-button {
     max-width: 500rpx;
     margin: 0 auto;
@@ -94,12 +72,6 @@
     text-align: center;
     max-width: 500rpx;
     margin-top: 60rpx;
-  }
-  .entry-auto-login-tip {
-    font-size: 28rpx;
-    color: $touch-color-weak;
-    margin-top: 20rpx;
-    text-align: center;
   }
   .entry-test-login {
     position: absolute;

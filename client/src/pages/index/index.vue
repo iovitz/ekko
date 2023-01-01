@@ -41,21 +41,17 @@
 
   const handleChange = (e: any) => {
     current.value = e.detail.current
-    phoneVibrateShort()
+    if (e.detail.source === 'touch') {
+      phoneVibrateShort()
+    }
   }
 
   const handleGoSetting = () => {
     printer.info('前往设置')
   }
 
-  const switchSwiperCurrent = (v: any) => {
-    const regTel = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/
-
-    if (regTel.test(v.detail.value)) {
-      console.log('电话号码符合要求')
-    } else {
-      console.log('请输入正确的电话号码')
-    }
+  const switchSwiperCurrent = (v: number) => {
+    current.value = v
   }
 </script>
 
