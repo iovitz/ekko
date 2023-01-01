@@ -12,3 +12,5 @@ export enum ServerResponseStatus {
   Success = 'Success',
   Failed = 'Failed'
 }
+
+export enum ErrorMessage {}
