@@ -34,12 +34,9 @@ export interface KoaContext<TParams extends {} = {}, TBody = any, TData = any> e
 rootRouter.get('test', (ctx) => {})
 
 const data: any = {}
-
-let prop: any
 function reqProcess(methodType: MethodType) {
   return function (path: `/${string}`, paramsSchema?: Schema | string) {
     return function (targetPrototype: any, methodName: string, descriptor: PropertyDescriptor) {
-      prop = targetPrototype
       const originFn = targetPrototype[methodName]
       targetPrototype[methodName] = async function (...args: any[]) {
         const ajv = new Ajv()
@@ -52,6 +49,7 @@ function reqProcess(methodType: MethodType) {
         }
         await originFn.apply(this, ...args)
       }
+      data[methodName] = originFn
       Reflect.defineMetadata('path', path, targetPrototype, methodName)
       Reflect.defineMetadata('methodType', methodType, targetPrototype, methodName)
     }
@@ -65,8 +63,6 @@ export const Controller = (module: `/${string}`) => {
       prefix: modulePath
     })
     const { prototype } = targetClass
-    console.log('uuu', prototype === prop)
-    console.log(prototype)
     Reflect.ownKeys(prototype).forEach((key) => {
       if (key !== 'constructor') {
         const fn = prototype[key]
