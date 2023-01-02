@@ -30,7 +30,7 @@ INSERT INTO `users` (`username`, `password`, `nickname`) VALUES ('iovitz', '3f73
 
 ## 验证码表
 
-用来接受用户的验证码
+用来保存用户的验证码
 ```sql
 -- 删除已存在的表(也可以不删)
 DROP TABLE IF EXISTS `varify_code`;
@@ -40,18 +40,4 @@ CREATE TABLE `touch_app`  (
   `create_time` char(13) NOT NULL,
   PRIMARY KEY (`number`)
 );
-INSERT INTO `varify_code` (`number`, `code`) VALUES ('19233', '123');
-
-
-DROP PROCEDURE IF EXISTS `ClearExpiredCodeItem`;
-CREATE PROCEDURE `ClearExpiredCodeItem`()
-BEGIN
-	DELETE FROM varify_code WHERE create_time < DATA_ADD(now(), INTERVAL - 5 MINUTE)
-END
-
-
-DROP PROCEDURE IF EXISTS `clear_expired_code_item`;
-CREATE EVENT `clear_expired_code_item` ON SCHEDULE 
-EVERY 1 SECOND DO
-CALL ClearExpiredCodeItem();
 ```
