@@ -17,6 +17,8 @@ module.exports = {
     'lines-between-class-members': 'off',
     'class-methods-use-this': 'off',
     'max-classes-per-file': 'off',
-    'no-shadow': 'off'
+    'no-shadow': 'off',
+    'func-names': 'off',
+    'no-param-reassign': 'off'
   }
 }

@@ -174,7 +174,7 @@ importers:
       mysql2: 2.3.3
       reflect-metadata: 0.1.13
       sequelize: 6.28.0_mysql2@2.3.3
-      sequelize-typescript: 2.1.5_6ce84f3d09839e8d6083760ab4cfd9cf
+      sequelize-typescript: 2.1.5_ntue6pijqopi2yedoyfljt6zz4
     devDependencies:
       '@types/ali-oss': 6.16.7
       '@types/jsonwebtoken': 8.5.9
@@ -187,8 +187,8 @@ importers:
       '@types/validator': 13.7.10
       node-polyfill-webpack-plugin: 2.0.1_webpack@5.75.0
       nodemon: 2.0.20
-      ts-loader: 9.4.2_typescript@4.7.4+webpack@5.75.0
-      ts-node: 10.9.1_12cf792df700d2bad2cf5c345e7cf6ae
+      ts-loader: 9.4.2_l2co7ao223gzrfox7yaiyzd7wu
+      ts-node: 10.9.1_clhxslpxadjlvuwplq2f47hwvy
       tsconfig-paths: 4.1.1
       typescript: 4.7.4
       webpack: 5.75.0_webpack-cli@5.0.1
@@ -3007,7 +3007,7 @@ packages:
       '@xtuc/long': 4.2.2
     dev: true
 
-  /@webpack-cli/configtest/2.0.1_webpack-cli@5.0.1+webpack@5.75.0:
+  /@webpack-cli/configtest/2.0.1_rjsyjcrmk25kqsjzwkvj3a2evq:
     resolution: {integrity: sha512-njsdJXJSiS2iNbQVS0eT8A/KPnmyH4pv1APj2K0d1wrZcBLw+yppxOy4CGqa0OxDJkzfL/XELDhD8rocnIwB5A==}
     engines: {node: '>=14.15.0'}
     peerDependencies:
@@ -3018,7 +3018,7 @@ packages:
       webpack-cli: 5.0.1_webpack@5.75.0
     dev: true
 
-  /@webpack-cli/info/2.0.1_webpack-cli@5.0.1+webpack@5.75.0:
+  /@webpack-cli/info/2.0.1_rjsyjcrmk25kqsjzwkvj3a2evq:
     resolution: {integrity: sha512-fE1UEWTwsAxRhrJNikE7v4EotYflkEhBL7EbajfkPlf6E37/2QshOy/D48Mw8G5XMFlQtS6YV42vtbG9zBpIQA==}
     engines: {node: '>=14.15.0'}
     peerDependencies:
@@ -3029,7 +3029,7 @@ packages:
       webpack-cli: 5.0.1_webpack@5.75.0
     dev: true
 
-  /@webpack-cli/serve/2.0.1_webpack-cli@5.0.1+webpack@5.75.0:
+  /@webpack-cli/serve/2.0.1_rjsyjcrmk25kqsjzwkvj3a2evq:
     resolution: {integrity: sha512-0G7tNyS+yW8TdgHwZKlDWYXFA6OJQnoLCQvYKkQP0Q2X205PSQ6RNUj0M+1OB/9gRQaUZ/ccYfaxd0nhaWKfjw==}
     engines: {node: '>=14.15.0'}
     peerDependencies:
@@ -4378,6 +4378,11 @@ packages:
 
   /debug/3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: 2.1.3
 
@@ -9250,7 +9255,7 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: false
 
-  /sequelize-typescript/2.1.5_6ce84f3d09839e8d6083760ab4cfd9cf:
+  /sequelize-typescript/2.1.5_ntue6pijqopi2yedoyfljt6zz4:
     resolution: {integrity: sha512-x1CNODct8gJyfZPwEZBU5uVGNwgJI2Fda913ZxD5ZtCSRyTDPBTS/0uXciF+MlCpyqjpmoCAPtudQWzw579bzA==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
@@ -9933,7 +9938,7 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /ts-loader/9.4.2_typescript@4.7.4+webpack@5.75.0:
+  /ts-loader/9.4.2_l2co7ao223gzrfox7yaiyzd7wu:
     resolution: {integrity: sha512-OmlC4WVmFv5I0PpaxYb+qGeGOdm5giHU7HwDDUjw59emP2UYMHy9fFSDcYgSNoH8sXcj4hGCSEhlDZ9ULeDraA==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -9946,37 +9951,6 @@ packages:
       semver: 7.3.8
       typescript: 4.7.4
       webpack: 5.75.0_webpack-cli@5.0.1
-    dev: true
-
-  /ts-node/10.9.1_12cf792df700d2bad2cf5c345e7cf6ae:
-    resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
-    hasBin: true
-    peerDependencies:
-      '@swc/core': '>=1.2.50'
-      '@swc/wasm': '>=1.2.50'
-      '@types/node': '*'
-      typescript: '>=2.7'
-    peerDependenciesMeta:
-      '@swc/core':
-        optional: true
-      '@swc/wasm':
-        optional: true
-    dependencies:
-      '@cspotcode/source-map-support': 0.8.1
-      '@tsconfig/node10': 1.0.9
-      '@tsconfig/node12': 1.0.11
-      '@tsconfig/node14': 1.0.3
-      '@tsconfig/node16': 1.0.3
-      '@types/node': 18.11.17
-      acorn: 8.8.1
-      acorn-walk: 8.2.0
-      arg: 4.1.3
-      create-require: 1.1.1
-      diff: 4.0.2
-      make-error: 1.3.6
-      typescript: 4.7.4
-      v8-compile-cache-lib: 3.0.1
-      yn: 3.1.1
     dev: true
 
   /ts-node/10.9.1_63890beeeccde17018ba967cc82821fb:
@@ -10037,6 +10011,37 @@ packages:
       diff: 4.0.2
       make-error: 1.3.6
       typescript: 4.9.4
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+    dev: true
+
+  /ts-node/10.9.1_clhxslpxadjlvuwplq2f47hwvy:
+    resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
+    hasBin: true
+    peerDependencies:
+      '@swc/core': '>=1.2.50'
+      '@swc/wasm': '>=1.2.50'
+      '@types/node': '*'
+      typescript: '>=2.7'
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      '@swc/wasm':
+        optional: true
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.9
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.3
+      '@types/node': 18.11.17
+      acorn: 8.8.1
+      acorn-walk: 8.2.0
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 4.7.4
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     dev: true
@@ -10503,9 +10508,9 @@ packages:
         optional: true
     dependencies:
       '@discoveryjs/json-ext': 0.5.7
-      '@webpack-cli/configtest': 2.0.1_webpack-cli@5.0.1+webpack@5.75.0
-      '@webpack-cli/info': 2.0.1_webpack-cli@5.0.1+webpack@5.75.0
-      '@webpack-cli/serve': 2.0.1_webpack-cli@5.0.1+webpack@5.75.0
+      '@webpack-cli/configtest': 2.0.1_rjsyjcrmk25kqsjzwkvj3a2evq
+      '@webpack-cli/info': 2.0.1_rjsyjcrmk25kqsjzwkvj3a2evq
+      '@webpack-cli/serve': 2.0.1_rjsyjcrmk25kqsjzwkvj3a2evq
       colorette: 2.0.19
       commander: 9.4.1
       cross-spawn: 7.0.3

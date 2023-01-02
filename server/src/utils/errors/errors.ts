@@ -1,7 +1,7 @@
 import { ServerResponseCode, ServerResponseStatus } from '@/common/constants'
 
 export abstract class ErrorBase extends Error {
-  constructor(public code: ServerResponseCode, message: string) {
+  constructor(public code: ServerResponseCode, message: any) {
     super(message)
   }
 
@@ -15,19 +15,19 @@ export abstract class ErrorBase extends Error {
 }
 
 export class ClientError extends ErrorBase {
-  constructor(message: string) {
+  constructor(message: any) {
     super(ServerResponseCode.ClientError, message)
   }
 }
 
 export class UnhandleExceptionError extends ErrorBase {
-  constructor(message: string) {
+  constructor(message: any) {
     super(ServerResponseCode.ServerError, message)
   }
 }
 
 export class AuthenticationError extends ErrorBase {
-  constructor(message: string) {
+  constructor(message: any) {
     super(ServerResponseCode.AthenticationError, message)
   }
 }
