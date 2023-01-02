@@ -2,11 +2,12 @@ export enum ServerError {
   UnhandleException = 500
 }
 export enum ServerResponseCode {
-  Success = 200,
-  ClientError = 400,
-  NotExist = 404,
-  ServerError = 500,
-  AthenticationError = 503
+  Success = 0,
+  ClientError = 40000,
+  AthenticationError = 40001,
+  ParamsError = 40002,
+  NotExist = 40004,
+  ServerError = 50000
 }
 export enum ServerResponseStatus {
   Success = 'Success',

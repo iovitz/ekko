@@ -1,4 +1,4 @@
-import { KoaContext } from 'src/utils/koa_request'
+import { KoaContext } from '@/utils/koa_request/decorators'
 
 export interface UserControllerCtx {
   register: KoaContext<

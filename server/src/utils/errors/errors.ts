@@ -15,19 +15,19 @@ export abstract class ErrorBase extends Error {
 }
 
 export class ClientError extends ErrorBase {
-  constructor(message: any) {
+  constructor(message: string) {
     super(ServerResponseCode.ClientError, message)
   }
 }
 
 export class UnhandleExceptionError extends ErrorBase {
-  constructor(message: any) {
+  constructor(message: string) {
     super(ServerResponseCode.ServerError, message)
   }
 }
 
 export class AuthenticationError extends ErrorBase {
-  constructor(message: any) {
+  constructor(message: string) {
     super(ServerResponseCode.AthenticationError, message)
   }
 }
