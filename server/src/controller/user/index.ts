@@ -19,7 +19,7 @@ export class UserController {
     }
     const code = Math.random()
       .toString(36)
-      .substring(2, 2 + 4)
+      .substring(3, 3 + 4)
     await VerifyCodeDao.createCodeItem(phone, code)
     ctx.body = 'success'
   }
