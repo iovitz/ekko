@@ -40,7 +40,7 @@ function reqProcess(methodType: MethodType) {
             throw new ClientError('Params validate error.')
           }
         }
-        await originFn.call(this, ctx, next)
+        await originFn(ctx, next)
       }
       Reflect.defineMetadata('path', path, targetPrototype, methodName)
       Reflect.defineMetadata('methodType', methodType, targetPrototype, methodName)
