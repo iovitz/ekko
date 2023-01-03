@@ -1,45 +1,55 @@
-import { Column, Table, Model, AllowNull, NotNull, Max } from 'sequelize-typescript'
+import { Column, Table, Model, AllowNull, NotNull, Max, DataType } from 'sequelize-typescript'
 import { sequelize } from '../mysql_connection'
 
 interface User {
-  username: string
-  password: string
+  id: number
+  phone: string
   nickname: string
+  sex?: number
   avatar?: string
-  phone?: string
-  email?: string
-  status?: number
+  createdAt: string
+  status: number
 }
 
 @Table({
   tableName: 'users'
 })
-export class UserModel extends Model<User> {
+export class UserModel extends Model<Partial<User>> {
   @Column({
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
+    type: DataType.NUMBER
   })
   declare id: number
 
-  @Column
-  declare username: string
-
-  @Column
-  declare password: string
-
-  @Column
-  declare nickname: string
-
-  @Column
-  declare avatar: string
-
-  @Column
+  @Column({
+    type: DataType.STRING
+  })
   declare phone: string
 
-  @Column
-  declare email: string
+  @Column({
+    type: DataType.STRING
+  })
+  declare nickname: string
 
-  @Column
+  @Column({
+    type: DataType.NUMBER
+  })
+  declare sex: number
+
+  @Column({
+    type: DataType.STRING
+  })
+  declare avatar: string
+
+  @Column({
+    type: DataType.TIME
+  })
+  declare createdAt: string
+
+  @Column({
+    type: DataType.NUMBER
+  })
   declare status: number
 }
 

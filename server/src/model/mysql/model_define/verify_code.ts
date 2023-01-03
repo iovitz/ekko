@@ -4,6 +4,7 @@ import { sequelize } from '../mysql_connection'
 interface VerifyCode {
   phone?: string
   code?: string
+  createdAt?: string
 }
 
 @Table({
@@ -20,6 +21,11 @@ export class VerifyCodeModel extends Model<VerifyCode> {
     type: DataType.CHAR
   })
   declare code: string
+
+  @Column({
+    type: DataType.TIME
+  })
+  declare createdAt: string
 }
 
 sequelize.addModels([VerifyCodeModel])

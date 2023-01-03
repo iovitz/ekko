@@ -2,6 +2,7 @@ import 'reflect-metadata'
 import KoaRouter from 'koa-router'
 import { Context, Next, ParameterizedContext } from 'koa'
 import Ajv, { Schema } from 'ajv'
+import bodyParser from 'koa-bodyparser'
 import appConfig from '@/config/app_config'
 import { ClientError } from '../errors/errors'
 import { BaseController } from './base.controller'
@@ -20,6 +21,8 @@ export interface KoaContext<TParams extends {} = {}, TBody = any, TData = any> e
   }
   body: TData
 }
+export type KoaPostContext<TBody = any, TData = any> = KoaContext<{}, TBody, TData>
+export type KoaGetContext<TParams extends {} = {}> = KoaContext<TParams>
 
 const ajv = new Ajv()
 function reqProcess(methodType: MethodType) {

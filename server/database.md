@@ -8,36 +8,28 @@ CREATE DATABASE `miit_data` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_general_ci'
 ## 用户表(users)
 
 ```sql
--- 删除已存在的表(也可以不删)
 DROP TABLE IF EXISTS `users`;
--- 创建表
-CREATE TABLE `users` (
-  `id` smallint NOT NULL,
-  `username` char(32) NOT NULL,
-  `password` char(32) NOT NULL,
+CREATE TABLE `users`  (
+  `id` smallint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `phone` char(11) NOT NULL,
   `nickname` char(32) NOT NULL,
-  `avatar` varchar(50) NULL,
-  `phone` char(20) NULL,
-  `email` char(30) NULL,
+  `sex` tinyint(1) UNSIGNED NULL DEFAULT NULL,
+  `avatar` char(50) NULL DEFAULT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
 );
--- 填充mock数据
--- username: iovitz
--- password: iovitz
-INSERT INTO `users` (`username`, `password`, `nickname`) VALUES ('iovitz', '3f73eca5db00d2fecd228ea5f3b7bf99', 'iovitz');
 ```
 
 ## 验证码表
 
-用来保存用户的验证码
 ```sql
 -- 删除已存在的表(也可以不删)
 DROP TABLE IF EXISTS `varify_code`;
-CREATE TABLE `touch_app`  (
-  `number` char(11) NOT NULL,
-  `code` char(4) NOT NULL,
-  `create_time` char(13) NOT NULL,
-  PRIMARY KEY (`number`)
+CREATE TABLE `varify_code`  (
+  `phone` char(11) NOT NULL,
+  `code` char(32) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`phone`)
 );
 ```

@@ -26,6 +26,7 @@ export async function responseFormat(ctx: Context, next: Next) {
     if (err instanceof ErrorBase) {
       ctx.body = err.toJSON()
     } else if (err instanceof Error) {
+      printer.error(err.message)
       ctx.body = new UnhandleExceptionError(err.message || 'Server error').toJSON()
     }
   }
