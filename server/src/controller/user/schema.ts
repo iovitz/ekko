@@ -18,7 +18,7 @@ export const userParamsSchema: Record<string, any> = {
     properties: {
       phone: {
         type: 'string',
-        pattern: '1[34578]\\d{9}'
+        pattern: '1[034578]\\d{9}'
       },
       code: {
         type: 'string',

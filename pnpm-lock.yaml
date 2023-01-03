@@ -70,9 +70,11 @@ importers:
       '@dcloudio/uni-stacktracey': 3.0.0-alpha-3061420221216001
       '@dcloudio/uni-ui': ^1.4.23
       '@dcloudio/vite-plugin-uni': 3.0.0-alpha-3061420221216001
+      '@types/lodash': ^4.14.191
       eslint: ^8.30.0
       eslint-plugin-vue: ^9.8.0
       lerna: ^6.0.3
+      lodash: ^4.17.21
       pinia: ^2.0.28
       postcss: ^8.4.20
       sass: ^1.57.1
@@ -96,6 +98,7 @@ importers:
       '@dcloudio/uni-mp-weixin': 3.0.0-alpha-3061420221216001_postcss@8.4.20+vue@3.2.45
       '@dcloudio/uni-quickapp-webview': 3.0.0-alpha-3061420221216001_postcss@8.4.20+vue@3.2.45
       '@dcloudio/uni-ui': 1.4.23
+      lodash: 4.17.21
       pinia: 2.0.28_prq2uz4lho2pwp6irk4cfkrxwu
       postcss: 8.4.20
       uview-plus: 3.1.20
@@ -107,6 +110,7 @@ importers:
       '@dcloudio/uni-cli-shared': 3.0.0-alpha-3061420221216001_postcss@8.4.20+vue@3.2.45
       '@dcloudio/uni-stacktracey': 3.0.0-alpha-3061420221216001
       '@dcloudio/vite-plugin-uni': 3.0.0-alpha-3061420221216001_u6pijzyclr7nlyugtvvx3fxoty
+      '@types/lodash': 4.14.191
       eslint: 8.30.0
       eslint-plugin-vue: 9.8.0_eslint@8.30.0
       lerna: 6.1.0
@@ -2582,6 +2586,10 @@ packages:
     resolution: {integrity: sha512-S7D//zbF0oJJJ7l6eFT2ThXPCjxHOv84HKMKiZPmVu51Bf4GWZGbTZDedIoUo/aXEIwTnfKbSiod/vqidfDwjg==}
     dependencies:
       '@types/koa': 2.13.5
+    dev: true
+
+  /@types/lodash/4.14.191:
+    resolution: {integrity: sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==}
     dev: true
 
   /@types/mime/3.0.1:

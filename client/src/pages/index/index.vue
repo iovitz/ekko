@@ -24,8 +24,11 @@
             <DiaryListVue></DiaryListVue>
           </view>
         </swiper-item>
-        <swiper-item class="index-swiper-item">123123</swiper-item>
+        <swiper-item class="index-swiper-item">
+          <Touch class="index-touch"></Touch>
+        </swiper-item>
       </swiper>
+      <view class="index-go-publish" v-if="current === 0">+</view>
     </view>
   </view>
 </template>
@@ -35,6 +38,7 @@
   import DiaryListVue from '@/common/components/diary-list/diary-list.vue'
   import { useSystemStore } from '@/store'
   import { printer, phoneVibrateShort } from '@/common/utils'
+  import Touch from './touch/touch.vue'
 
   const systemStore = useSystemStore()
   const current = ref(0)
@@ -55,7 +59,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import '@/common/styles/vars.scss';
   .index-page {
     display: flex;
@@ -82,6 +86,9 @@
       height: 48rpx;
       width: 48rpx;
     }
+  }
+  .index-touch {
+    height: 100%;
   }
   .index-time-text {
     display: flex;
@@ -110,6 +117,7 @@
     flex-direction: column;
     flex: 1;
     overflow-y: scroll;
+    position: relative;
   }
   .index-swiper {
     flex: 1;
@@ -122,5 +130,19 @@
     flex: 1;
     overflow-y: scroll;
     margin-bottom: 20rpx;
+  }
+  .index-go-publish {
+    height: 100rpx;
+    width: 100rpx;
+    font-size: 60rpx;
+    line-height: 100rpx;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    margin-left: -50rpx;
+    bottom: 60rpx;
+    z-index: 999;
+    background-color: $touch-color-active;
+    border-radius: 60rpx;
   }
 </style>
