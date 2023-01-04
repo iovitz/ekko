@@ -26,7 +26,9 @@
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue'
+  import jwtDecode from 'jwt-decode'
   import { useSystemStore } from '@/store'
+  import { userLogin } from '@/common/request/user.request'
 
   const systemStore = useSystemStore()
   const phoneNumber = ref('')
@@ -45,13 +47,15 @@
     }
   }
   const handleSendCode = () => {
-    console.log('发送验证码')
     uni.navigateTo({
       url: '/pages/login/index'
     })
   }
-  const handleTestLogin = () => {
-    console.log('测试登录')
+  const handleTestLogin = async () => {
+    const randomNum = `1000000000${Math.floor(Math.random() * 10)}`
+    const { token } = await userLogin(randomNum, '')
+    const decode = jwtDecode(token)
+    console.log(decode)
   }
 </script>
 

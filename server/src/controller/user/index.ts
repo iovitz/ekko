@@ -27,11 +27,14 @@ export class UserController extends BaseController {
       const testUserData = await UserDao.findUserByPhone(phone)
       if (testUserData) {
         const { avatar, nickname, sex } = testUserData
-        ctx.body = createToken({
+        const res = {
           avatar,
           nickname,
           sex
-        })
+        }
+        ctx.body = {
+          token: createToken(res)
+        }
       }
       return
     }
@@ -44,7 +47,9 @@ export class UserController extends BaseController {
         const isUserExits = await UserDao.findUserByPhone(phone)
         if (!isUserExits) {
           await UserDao.createUser(phone, getRandomName())
-          ctx.body = 'success'
+          ctx.body = {
+            token: createToken(res)
+          }
         }
       }
     }

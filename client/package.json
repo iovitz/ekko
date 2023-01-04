@@ -49,6 +49,8 @@
     "@dcloudio/uni-mp-weixin": "3.0.0-alpha-3061420221216001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-alpha-3061420221216001",
     "@dcloudio/uni-ui": "^1.4.23",
+    "axios": "^1.2.2",
+    "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
     "pinia": "^2.0.28",
     "postcss": "^8.4.20",
