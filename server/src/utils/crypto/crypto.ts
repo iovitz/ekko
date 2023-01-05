@@ -1,6 +1,7 @@
 import { createHash } from 'crypto'
-import { sign } from 'jsonwebtoken'
+import { sign, verify } from 'jsonwebtoken'
 import appConfig from '@/config/app_config'
+import { AuthenticationError } from '../errors/errors'
 
 const PasswordSalt = appConfig.getConfig('password_salt')
 const TokenKey = appConfig.getConfig('token_key')
@@ -15,4 +16,21 @@ export function withSalt(password: string) {
 export function createToken<T extends {}>(data: T) {
   const token = sign(data, TokenKey)
   return token
+}
+
+const urlWhiteList = ['/touch/user/v1/login']
+
+// 解析jwt
+export function verifyToken(url: string, token?: string) {
+  if (urlWhiteList.includes(url)) {
+    return
+  }
+  if (!token) {
+    throw new AuthenticationError('Token Miss')
+  }
+  try {
+    verify(token, TokenKey)
+  } catch (e) {
+    throw new AuthenticationError('Invalid Token')
+  }
 }
