@@ -55,7 +55,6 @@
     const randomNum = `1000000000${Math.floor(Math.random() * 10)}`
     const { token } = await userLogin(randomNum, '')
     const decode = jwtDecode(token)
-    console.log(decode)
   }
 </script>
 

@@ -28,7 +28,7 @@
           <Touch class="index-touch"></Touch>
         </swiper-item>
       </swiper>
-      <view class="index-go-publish" v-if="current === 0">+</view>
+      <view class="index-go-publish" v-if="current === 0" @click="goPublish">+</view>
     </view>
   </view>
 </template>
@@ -48,6 +48,12 @@
     if (e.detail.source === 'touch') {
       phoneVibrateShort()
     }
+  }
+
+  const goPublish = () => {
+    uni.navigateTo({
+      url: '/pages/publish/index'
+    })
   }
 
   const handleGoSetting = () => {
