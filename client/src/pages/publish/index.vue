@@ -4,7 +4,7 @@
     <view :style="`height: ${systemStore.statusBarHeight * 2 + 10}rpx`"></view>
     <!-- #endif -->
     <textarea
-      :value="text"
+      v-model="content"
       placeholder="这一刻的想法"
       class="publish-textarea"
       maxlength="1000"
@@ -25,7 +25,7 @@
 
   const systemStore = useSystemStore()
   const articleStore = useArticleStore()
-  const text = ref('')
+  const content = ref('')
   let imgList: any[] = []
 
   const listStyles = reactive({
@@ -37,7 +37,8 @@
     }
   })
   const handlePublish = () => {
-    articleStore.publishArticle(text.value, imgList)
+    console.log(content.value)
+    articleStore.publishArticle(content.value, imgList)
   }
   const handleSelect = (e: { tempFiles: any[] }) => {
     const { tempFiles } = e
