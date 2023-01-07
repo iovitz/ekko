@@ -12,7 +12,7 @@
       :disable-preview="false"
       :adjust-position="true"
     />
-    <uni-file-picker limit="3" :image-styles="listStyles"></uni-file-picker>
+    <uni-file-picker limit="3" :image-styles="listStyles" @select="handleSelect" @delete="handleDelete"></uni-file-picker>
 
     <button class="publish-button touch-button primary entry-send-button" @click="handlePublish">Send Code</button>
   </view>
@@ -20,11 +20,13 @@
 
 <script setup lang="ts">
   import { reactive, ref } from 'vue'
-  import { useSystemStore } from '@/store'
+  import { useArticleStore, useSystemStore } from '@/store'
+  import { getUUID } from '@/common/utils/encrypt'
 
   const systemStore = useSystemStore()
+  const articleStore = useArticleStore()
   const text = ref('')
-  const imgList = reactive([])
+  let imgList: any[] = []
 
   const listStyles = reactive({
     border: {
@@ -35,7 +37,16 @@
     }
   })
   const handlePublish = () => {
-    console.log(text.value, imgList)
+    articleStore.publishArticle(text.value, imgList)
+  }
+  const handleSelect = (e: { tempFiles: any[] }) => {
+    const { tempFiles } = e
+    tempFiles.forEach((item) => {
+      imgList.push(item)
+    })
+  }
+  const handleDelete = (e: any) => {
+    imgList = imgList.filter(({ uuid }) => e.tempFile.uuid !== uuid)
   }
 </script>
 

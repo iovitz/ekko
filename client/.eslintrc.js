@@ -8,6 +8,9 @@ module.exports = {
   },
   rules: {
     'vue/multi-word-component-names': 'off',
-    'no-undef': 'off'
+    'no-undef': 'off',
+    'no-bitwise': 'off',
+    'no-multi-assign': 'off',
+    'no-plusplus': 'off'
   }
 }

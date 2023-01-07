@@ -12,9 +12,9 @@ export type CustomConfig = Readonly<{
   password_salt: string
   token_key: string
 
-  aliyun_accessKeyId: string
-  aliyun_accessKeySecret: string
-  aliyun_arn: string
+  ali_cloud_arn: string
+  ali_cloud_access_key: string
+  ali_cloud_access_key_secret: string
 }>
 
 declare module 'dotenv' {
