@@ -26,8 +26,9 @@ export class UserController extends BaseController {
     if (testPhoneSet.includes(phone)) {
       const testUserData = await UserDao.findUserByPhone(phone)
       if (testUserData) {
-        const { avatar, nickname, sex } = testUserData
+        const { avatar, nickname, sex, id } = testUserData
         const res = {
+          id,
           avatar,
           nickname,
           sex
@@ -48,7 +49,7 @@ export class UserController extends BaseController {
         if (!isUserExits) {
           await UserDao.createUser(phone, getRandomName())
           ctx.body = {
-            token: `Bearer ${createToken(res)}`
+            token: `${createToken(res)}`
           }
         }
       }

@@ -21,6 +21,9 @@ export interface KoaContext<TParams extends {} = {}, TBody = any, TData = any> e
     body: TBody
   }
   body: TData
+  user: {
+    id: string
+  }
 }
 export type KoaPostContext<TBody = any, TData = any> = KoaContext<{}, TBody, TData>
 export type KoaGetContext<TParams extends {} = {}> = KoaContext<TParams>

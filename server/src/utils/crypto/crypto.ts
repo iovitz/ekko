@@ -18,18 +18,18 @@ export function createToken<T extends {}>(data: T) {
   return token
 }
 
-const urlWhiteList = ['/touch/user/v1/login', '/touch/test']
+const urlWhiteList = ['/touch/user/v1/login']
 
 // 解析jwt
 export function verifyToken(url: string, token?: string) {
   if (urlWhiteList.includes(url)) {
-    return
+    return {}
   }
   if (!token) {
     throw new AuthenticationError('Token Miss')
   }
   try {
-    verify(token, TokenKey)
+    return verify(token.split(' ')[1], TokenKey)
   } catch (e) {
     throw new AuthenticationError('Invalid Token')
   }
