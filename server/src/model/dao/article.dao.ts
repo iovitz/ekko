@@ -16,8 +16,9 @@ export class ArticleDao extends BaseDao {
    * 创建新用户
    * @param phone 手机号
    */
-  static createArticle(content: string, files: string) {
+  static createArticle(uid: number, content: string, files: string) {
     return ArticleModel.create({
+      uid,
       content,
       files
     })

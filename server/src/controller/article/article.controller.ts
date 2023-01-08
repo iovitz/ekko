@@ -19,7 +19,8 @@ export class ArticleController extends BaseController {
     }>
   ) {
     const { content, files } = ctx.request.body
-    await ArticleDao.createArticle(content, JSON.stringify(files))
+    const { id } = ctx.user
+    await ArticleDao.createArticle(id, content, JSON.stringify(files))
     ctx.body = 'success'
   }
 }

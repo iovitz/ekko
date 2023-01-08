@@ -2,12 +2,14 @@ import { Column, Table, Model, AllowNull, NotNull, Max, DataType, PrimaryKey, Au
 import { sequelize } from '../mysql_connection'
 
 interface Article {
-  id?: string
+  id?: number
+  uid?: number
   content?: string
   files?: string
   like?: string
-  comment?: string
+  commentCount?: string
   createdAt?: string
+  status?: number
 }
 
 @Table({
@@ -19,7 +21,12 @@ export class ArticleModel extends Model<Article> {
   @Column({
     type: DataType.NUMBER
   })
-  declare id: string
+  declare id: number
+
+  @Column({
+    type: DataType.NUMBER
+  })
+  declare uid: number
 
   @Column({
     type: DataType.CHAR
@@ -39,12 +46,17 @@ export class ArticleModel extends Model<Article> {
   @Column({
     type: DataType.NUMBER
   })
-  declare comment: number
+  declare commentCount: number
 
   @Column({
     type: DataType.TIME
   })
   declare createdAt: string
+
+  @Column({
+    type: DataType.TINYINT
+  })
+  declare status: number
 }
 
 sequelize.addModels([ArticleModel])

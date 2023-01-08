@@ -49,14 +49,15 @@ CREATE TABLE `varify_code`  (
 ```sql
 DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article`  (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `content` varchar(1023) NOT NULL,
-  `files` varchar(1023) NOT NULL,
-  `view` smallint UNSIGNED NOT NULL DEFAULT 0,
+  `id` smallint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uid` smallint UNSIGNED NOT NULL,
+  `content` varchar(5000) NOT NULL DEFAULT '',
+  `files` varchar(1000) NOT NULL DEFAULT '[]',
   `like` smallint UNSIGNED NOT NULL DEFAULT 0,
-  `comment` smallint UNSIGNED NOT NULL DEFAULT 0,
+  `commentCount` smallint UNSIGNED NOT NULL DEFAULT 0,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` tinyint NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
+  `status` tinyint(1) NULL DEFAULT 1,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `uid` FOREIGN KEY (`uid`) REFERENCES `touch_app`.`users` (`id`)
 );
 ```
