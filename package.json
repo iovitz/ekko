@@ -10,7 +10,11 @@
     "prepare": "husky install",
     "clean": "lerna clean",
     "lint-staged": "lint-staged --allow-empty",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "pi": "pnpm install",
+    "ci": "echo ci",
+    "cd": "echo cd",
+    "test": "echo test"
   },
   "repository": {
     "type": "git",
@@ -63,5 +67,8 @@
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "pnpm": "^7.22.0"
   }
 }
