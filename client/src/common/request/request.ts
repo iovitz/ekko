@@ -43,13 +43,22 @@ class ShortChain {
         header: {
           ...header,
           ...requestHeader,
-          authorization: storage.get('token') || 'no token'
+          authorization: `Bearer ${storage.get('token') || 'token'}`
         }
       })
     }).then((res: UniApp.RequestSuccessCallbackResult) => {
       const data = res.data as Response
-      if (data.code !== 0) {
-        throw new Error(data.data)
+      switch (data.code) {
+        case 40001:
+          storage.remove('token')
+          uni.redirectTo({
+            url: '/pages/entry/entry'
+          })
+          break
+        default:
+          if (data.code !== 0) {
+            throw new Error(data.data)
+          }
       }
       return res.data
     })

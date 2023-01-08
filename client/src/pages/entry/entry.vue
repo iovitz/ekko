@@ -36,8 +36,6 @@
       uni.redirectTo({
         url: '/pages/index/index'
       })
-    } else {
-      printer.info('没有Login')
     }
   })
 
@@ -60,11 +58,20 @@
   }
   const handleSendCode = () => {
     uni.navigateTo({
-      url: '/pages/login/index'
+      url: '/pages/login/login'
     })
   }
-  const handleTestLogin = async () => {
-    const res = await userStore.login(`1000000000${Math.floor(Math.random() * 10)}`, '0000')
+  const handleTestLogin = () => {
+    userStore
+      .login(`1000000000${Math.floor(Math.random() * 10)}`, '0000')
+      .then(() => {
+        uni.navigateTo({
+          url: '/pages/index/index'
+        })
+      })
+      .catch(() => {
+        console.log('测试账号登录失败')
+      })
   }
 </script>
 
