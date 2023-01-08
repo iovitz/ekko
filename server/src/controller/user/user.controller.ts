@@ -33,7 +33,7 @@ export class UserController extends BaseController {
           sex
         }
         ctx.body = {
-          token: createToken(res)
+          token: `Bearer ${createToken(res)}`
         }
       }
       return
@@ -48,7 +48,7 @@ export class UserController extends BaseController {
         if (!isUserExits) {
           await UserDao.createUser(phone, getRandomName())
           ctx.body = {
-            token: createToken(res)
+            token: `Bearer ${createToken(res)}`
           }
         }
       }

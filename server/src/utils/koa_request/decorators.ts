@@ -6,6 +6,7 @@ import bodyParser from 'koa-bodyparser'
 import appConfig from '@/config/app_config'
 import { ClientError } from '../errors/errors'
 import { BaseController } from './base.controller'
+import { printer } from '../printer'
 
 type MethodType = 'get' | 'post' | 'put' | 'patch' | 'delete'
 
@@ -40,6 +41,7 @@ function reqProcess(methodType: MethodType) {
           }
           const valid = validate(data)
           if (!valid) {
+            printer.error(validate.errors)
             throw new ClientError('Params validate error.')
           }
         }

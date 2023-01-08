@@ -10,8 +10,8 @@ export async function globalMiddleware(ctx: Context, next: Next) {
 
     const now = new Date()
     printer.info(`${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`, method, ctx.path)
-    // const token = header.authorization
-    // verifyToken(ctx.path, token)
+    const token = header.authorization
+    verifyToken(ctx.path, token)
     await next()
     if (ctx.body) {
       ctx.body = {
