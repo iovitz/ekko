@@ -22,7 +22,7 @@ export interface KoaContext<TParams extends {} = {}, TBody = any, TData = any> e
   }
   body: TData
   user: {
-    id: string
+    id: number
   }
 }
 export type KoaPostContext<TBody = any, TData = any> = KoaContext<{}, TBody, TData>
