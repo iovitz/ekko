@@ -8,19 +8,19 @@
 	},
 	"pages": [
 		{
-			"path": "pages/publish/index",
-			"style": {
-				"navigationBarTitleText": "发 布 想 法"
-			}
-		},
-		{
-			"path": "pages/login/index",
+			"path": "pages/entry/entry",
 			"style": {
 				"navigationBarTitleText": "T O U C H"
 			}
 		},
 		{
-			"path": "pages/entry/index",
+			"path": "pages/publish/publish",
+			"style": {
+				"navigationBarTitleText": "发 布 想 法"
+			}
+		},
+		{
+			"path": "pages/login/login",
 			"style": {
 				"navigationBarTitleText": "T O U C H"
 			}

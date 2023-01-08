@@ -19,9 +19,11 @@
 </template>
 
 <script setup lang="ts">
-  import { reactive, ref } from 'vue'
+  import { onMounted, reactive, ref } from 'vue'
   import { useArticleStore, useSystemStore } from '@/store'
   import { getUUID } from '@/common/utils/encrypt'
+  import { storage } from '@/common/utils/store/storage'
+  import { printer } from '@/common/utils'
 
   const systemStore = useSystemStore()
   const articleStore = useArticleStore()
@@ -37,8 +39,8 @@
     }
   })
   const handlePublish = () => {
-    console.log(content.value)
     articleStore.publishArticle(content.value, imgList)
+    uni.navigateBack()
   }
   const handleSelect = (e: { tempFiles: any[] }) => {
     const { tempFiles } = e
