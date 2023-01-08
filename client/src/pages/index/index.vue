@@ -52,7 +52,7 @@
 
   const goPublish = () => {
     uni.navigateTo({
-      url: '/pages/publish/index'
+      url: '/pages/publish/publish'
     })
   }
 
