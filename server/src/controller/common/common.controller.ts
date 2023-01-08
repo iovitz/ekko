@@ -4,8 +4,8 @@ import appConfig from '@/config/app_config'
 
 const config = appConfig.getConfig()
 
-@Controller('/secret')
-export class SecretController extends BaseController {
+@Controller('/common')
+export class CommonController extends BaseController {
   @Post('/ali_sts_key')
   async test(ctx: KoaContext) {
     const sts = new STS({

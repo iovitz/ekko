@@ -40,7 +40,6 @@ export const useArticleStore = defineStore({
             })
           })
           return Promise.all(promisses).then(() => {
-            console.log(JSON.stringify(files).length)
             return publishArticle(content, files)
           })
         })

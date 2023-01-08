@@ -21,9 +21,6 @@
 <script setup lang="ts">
   import { onMounted, reactive, ref } from 'vue'
   import { useArticleStore, useSystemStore } from '@/store'
-  import { getUUID } from '@/common/utils/encrypt'
-  import { storage } from '@/common/utils/store/storage'
-  import { printer } from '@/common/utils'
 
   const systemStore = useSystemStore()
   const articleStore = useArticleStore()
