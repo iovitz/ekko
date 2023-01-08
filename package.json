@@ -12,7 +12,7 @@
     "lint-staged": "lint-staged --allow-empty",
     "commit": "git-cz",
     "pi": "pnpm install",
-    "ci": "echo ci",
+    "ci": "echo ci222",
     "cd": "echo cd",
     "test": "echo test"
   },
