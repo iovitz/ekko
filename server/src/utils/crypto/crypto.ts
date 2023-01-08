@@ -18,7 +18,7 @@ export function createToken<T extends {}>(data: T) {
   return token
 }
 
-const urlWhiteList = ['/touch/user/v1/login']
+const urlWhiteList = ['/touch/user/v1/login', '/touch/test']
 
 // 解析jwt
 export function verifyToken(url: string, token?: string) {
