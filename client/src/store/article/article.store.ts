@@ -14,13 +14,16 @@ export const useArticleStore = defineStore({
   },
   actions: {
     publishArticle(content: string, imgList: any[]) {
-      const files: string[] = []
+      const files: any[] = []
       this.uploadHandler = getAliCloudKey()
         .then((res) => {
           const promisses = imgList.map((fileItem) => {
             return new Promise((success, fail) => {
               const path = `images/${getUUID(20, 0)}-${Date.now()}${fileItem.url?.substring(fileItem.url.lastIndexOf('.') || 0)}`
-              files.push(`https://touch-app-dev.oss-cn-hangzhou.aliyuncs.com/${path}`)
+              files.push({
+                url: `https://touch-app-dev.oss-cn-hangzhou.aliyuncs.com/${path}`,
+                type: fileItem.fileType
+              })
               uni.uploadFile({
                 url: 'https://touch-app-dev.oss-cn-hangzhou.aliyuncs.com/',
                 filePath: fileItem.url,
@@ -37,6 +40,7 @@ export const useArticleStore = defineStore({
             })
           })
           return Promise.all(promisses).then(() => {
+            console.log(JSON.stringify(files).length)
             return publishArticle(content, files)
           })
         })
@@ -44,8 +48,12 @@ export const useArticleStore = defineStore({
           this.uploadHandler = null
         })
         .catch((e) => {
-          this.uploadHandler = null
-          printer.error('上传失败', e)
+          if (e instanceof Error) {
+            this.uploadHandler = null
+            printer.error('上传失败', e.message)
+          } else {
+            printer.error('上传失败', e)
+          }
         })
     }
   }

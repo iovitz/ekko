@@ -1,8 +1,9 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
+import { storage } from '../utils/store/storage'
 
 type Header = Record<string, string>
 
-interface Response<T> {
+interface Response<T = any> {
   code: number
   status: string
   data: T
@@ -41,10 +42,15 @@ class ShortChain {
         timeout,
         header: {
           ...header,
-          ...requestHeader
+          ...requestHeader,
+          authorization: storage.get('token') || 'no token'
         }
       })
     }).then((res: UniApp.RequestSuccessCallbackResult) => {
+      const data = res.data as Response
+      if (data.code !== 0) {
+        throw new Error(data.data)
+      }
       return res.data
     })
   }
