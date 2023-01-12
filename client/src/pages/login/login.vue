@@ -28,7 +28,7 @@
 
   onMounted(() => {
     if (storage.get('token')) {
-      uni.redirectTo({
+      uni.navigateTo({
         url: '/pages/index/index'
       })
     } else {

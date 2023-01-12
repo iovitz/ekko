@@ -1,11 +1,12 @@
 import { Column, Table, Model, AllowNull, NotNull, Max, DataType, PrimaryKey, AutoIncrement } from 'sequelize-typescript'
 import { sequelize } from '../mysql_connection'
 
-interface Article {
+interface Diary {
   id?: number
   uid?: number
   content?: string
   files?: string
+  permission?: number
   like?: string
   commentCount?: string
   createdAt?: string
@@ -13,9 +14,9 @@ interface Article {
 }
 
 @Table({
-  tableName: 'article'
+  tableName: 'diary'
 })
-export class ArticleModel extends Model<Article> {
+export class DiaryModel extends Model<Diary> {
   @PrimaryKey
   @AutoIncrement
   @Column({
@@ -41,6 +42,11 @@ export class ArticleModel extends Model<Article> {
   @Column({
     type: DataType.NUMBER
   })
+  declare permission: string
+
+  @Column({
+    type: DataType.NUMBER
+  })
   declare like: number
 
   @Column({
@@ -59,4 +65,4 @@ export class ArticleModel extends Model<Article> {
   declare status: number
 }
 
-sequelize.addModels([ArticleModel])
+sequelize.addModels([DiaryModel])

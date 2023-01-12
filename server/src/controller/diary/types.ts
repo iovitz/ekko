@@ -1,6 +1,6 @@
 import { KoaContext } from '@/utils/koa_request/decorators'
 
-export interface ArticleController {
+export interface DiaryController {
   publish: KoaContext<
     string,
     {},

@@ -43,7 +43,7 @@ class ShortChain {
         header: {
           ...header,
           ...requestHeader,
-          authorization: `Bearer ${storage.get('token') || 'token'}`
+          authorization: storage.get('token') || 'token'
         }
       })
     }).then((res: UniApp.RequestSuccessCallbackResult) => {
@@ -64,17 +64,17 @@ class ShortChain {
     })
   }
 
-  public get<T = unknown>(url: string, data: any, header: Header = {}) {
+  public get<T = unknown>(url: string, data: any = {}, header: Header = {}) {
     return this.request('GET', url, data, header) as Promise<Response<T>>
   }
 
-  public post<T = unknown>(url: string, data: any, header: Header = {}) {
+  public post<T = unknown>(url: string, data: any = {}, header: Header = {}) {
     return this.request('POST', url, data, header) as Promise<Response<T>>
   }
 }
 
 export const commonRequest = new ShortChain({
-  baseURL: 'http://localhost:28257/touch',
+  baseURL: 'http://192.168.1.104:28257/touch',
   timeout: 20000,
   header: {}
 })

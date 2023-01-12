@@ -1,6 +1,6 @@
 import { JSONSchemaType, Schema } from 'ajv'
 
-export const articleParamsSchema: Record<string, any> = {
+export const diaryParamsSchema: Record<string, any> = {
   publish: {
     type: 'object',
     properties: {

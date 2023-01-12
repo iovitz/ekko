@@ -1,19 +1,35 @@
 import { defineStore } from 'pinia'
 import { getUUID } from '@/common/utils/encrypt'
 import { getAliCloudKey } from '@/common/request/secret.request'
-import { publishArticle } from '@/common/request/article.request'
+import { getMyDiaryList, publishDiary } from '@/common/request/diary.request'
 import { printer } from '@/common/utils'
 
-export const useArticleStore = defineStore({
-  id: 'article', // id必填，且需要唯一
+export const useDiaryStore = defineStore({
+  id: 'diary', // id必填，且需要唯一
   state: () => {
     const { platform } = uni.getSystemInfoSync()
     return {
+      myDiaryList: [] as Array<{
+        id: number
+        content: string
+        files: {
+          type: string
+          url: string
+        } | null
+        createdAt: string
+      }>,
       uploadHandler: null as null | Promise<void>
     }
   },
   actions: {
-    publishArticle(content: string, imgList: any[]) {
+    getMyDiary() {
+      const res = getMyDiaryList(1).then((res) => {
+        res.forEach((itm) => {
+          this.myDiaryList.push(itm)
+        })
+      })
+    },
+    publishDiary(content: string, imgList: any[], isPublic: boolean) {
       const files: any[] = []
       this.uploadHandler = getAliCloudKey()
         .then((res) => {
@@ -40,7 +56,7 @@ export const useArticleStore = defineStore({
             })
           })
           return Promise.all(promisses).then(() => {
-            return publishArticle(content, files)
+            return publishDiary(content, files, isPublic ? 1 : 0)
           })
         })
         .then(() => {

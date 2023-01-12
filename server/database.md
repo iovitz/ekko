@@ -47,12 +47,13 @@ CREATE TABLE `varify_code`  (
 
 ## 文章表
 ```sql
-DROP TABLE IF EXISTS `article`;
-CREATE TABLE `article`  (
+DROP TABLE IF EXISTS `diary`;
+CREATE TABLE `diary`  (
   `id` smallint UNSIGNED NOT NULL AUTO_INCREMENT,
   `uid` smallint UNSIGNED NOT NULL,
   `content` varchar(5000) NOT NULL DEFAULT '',
   `files` varchar(1000) NOT NULL DEFAULT '[]',
+	`permission` tinyint(2) NOT NULL DEFAULT 0, 
   `like` smallint UNSIGNED NOT NULL DEFAULT 0,
   `commentCount` smallint UNSIGNED NOT NULL DEFAULT 0,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

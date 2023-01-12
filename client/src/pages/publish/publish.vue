@@ -14,17 +14,23 @@
     />
     <uni-file-picker limit="3" :image-styles="listStyles" @select="handleSelect" @delete="handleDelete"></uni-file-picker>
 
+    <view class="publish-switch-wrapper uni-list-cell uni-list-cell-pd">
+      <view class="uni-list-cell-db">分享到Touch</view>
+      <switch @change="handleSwitchChange" />
+    </view>
+
     <button class="publish-button touch-button primary entry-send-button" @click="handlePublish">Send Code</button>
   </view>
 </template>
 
 <script setup lang="ts">
   import { onMounted, reactive, ref } from 'vue'
-  import { useArticleStore, useSystemStore } from '@/store'
+  import { useDiaryStore, useSystemStore } from '@/store'
 
   const systemStore = useSystemStore()
-  const articleStore = useArticleStore()
+  const diaryStore = useDiaryStore()
   const content = ref('')
+  const isPublic = ref(false)
   let imgList: any[] = []
 
   const listStyles = reactive({
@@ -36,8 +42,11 @@
     }
   })
   const handlePublish = () => {
-    articleStore.publishArticle(content.value, imgList)
+    diaryStore.publishDiary(content.value, imgList, isPublic.value)
     uni.navigateBack()
+  }
+  const handleSwitchChange = ({ detail }: any) => {
+    isPublic.value = detail.value
   }
   const handleSelect = (e: { tempFiles: any[] }) => {
     const { tempFiles } = e
@@ -65,7 +74,7 @@
     height: 300rpx;
     margin-bottom: 40rpx;
   }
-  .publish-button {
-    margin-top: 30rpx;
+  .publish-switch-wrapper::after {
+    display: none;
   }
 </style>

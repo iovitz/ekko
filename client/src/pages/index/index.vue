@@ -12,7 +12,7 @@
     </view>
 
     <view class="index-content">
-      <swiper class="index-swiper" :current="current" @change="handleChange" duration="300">
+      <swiper class="index-swiper" :current="current" @change="handleChange" duration="300" refresher-threshold="50">
         <swiper-item class="index-swiper-item">
           <view class="index-time-text">
             <text class="index-date-day">23</text>
