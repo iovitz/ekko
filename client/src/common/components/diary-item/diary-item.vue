@@ -1,5 +1,5 @@
 <template>
-  <view class="diary-item">
+  <view class="diary-item" @click="goDetail" :class="{ uploading: !Boolean(id) }">
     <view class="diary-item-left">
       <view class="diary-time"> {{ time }} </view>
       <view class="diary-permission"> Touch可见 </view>
@@ -17,8 +17,8 @@
   import { computed } from 'vue'
 
   const props = defineProps<{
-    id: number
-    timestamp: string
+    id: number | null
+    timestamp: number | string
     content: string
     files: {
       type: string
@@ -29,6 +29,10 @@
     const date = new Date(props.timestamp)
     return `${date.getMonth() + 1}/${date.getDay()}`
   })
+
+  const goDetail = () => {
+    uni.navigateTo({ url: `/pages/diary/diary?id=${props.id}` })
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -43,6 +47,10 @@
     padding: 30rpx;
     box-sizing: border-box;
     display: flex;
+    transition: all ease 300ms;
+    &.uploading {
+      opacity: 0.5;
+    }
   }
   .diary-item-content {
     display: flex;

@@ -4,7 +4,13 @@ export function publishDiary(content: string, files: any[], permission: number) 
   console.log(permission)
   return commonRequest
     .post<{
-      SecurityToken: string
+      id: number
+      content: string
+      files: {
+        type: string
+        url: string
+      } | null
+      createdAt: string
     }>('/diary/v1/publish', {
       content,
       files,
@@ -21,13 +27,28 @@ export function getMyDiaryList(page: number) {
       Array<{
         id: number
         content: string
-        files: {
-          type: string
-          url: string
-        } | null
+        files:
+          | {
+              type: string
+              url: string
+            }[]
+          | null
         createdAt: string
       }>
     >('/diary/v1/my_diary_list', { page })
+    .then((res) => {
+      return res.data
+    })
+}
+
+export function getDiaryDetail(id: number) {
+  return commonRequest
+    .post<{
+      id: number
+      content: string
+      files: string
+      createdAt: string
+    }>('/diary/v1/diary_detail', { id })
     .then((res) => {
       return res.data
     })

@@ -1,5 +1,7 @@
+import { Op } from 'sequelize'
 import { DiaryModel } from '../mysql/model_define/diary'
 import { BaseDao } from './base.dao'
+import { UserModel } from '../mysql/model_define/users'
 
 export class DiaryDao extends BaseDao {
   /**
@@ -12,16 +14,36 @@ export class DiaryDao extends BaseDao {
       files
     })
   }
+
   /**
    * 创建新用户
    * @param phone 手机号
    */
   static createDiary(uid: number, content: string, files: string, permission: number) {
-    return DiaryModel.create({
-      uid,
-      content,
-      files,
-      permission
+    return DiaryModel.create(
+      {
+        uid,
+        content,
+        files,
+        permission
+      },
+      {
+        raw: true,
+        attributes: ['id', 'content', 'files', 'createdAt', 'status']
+      }
+    )
+  }
+
+  static findDiaryById(id: number) {
+    return DiaryModel.findOne({
+      raw: true,
+      where: {
+        id
+      },
+      attributes: ['id', 'content', 'files', 'createdAt', 'status'],
+      order: [['createdAt', 'desc']]
+      // offset: (page - 1) * 15,
+      // limit: 15
     })
   }
 
@@ -31,12 +53,29 @@ export class DiaryDao extends BaseDao {
    */
   static getPageDiaryByUser(uid: number, page: number) {
     return DiaryModel.findAll({
+      raw: true,
       where: {
         uid
       },
-      attributes: ['id', 'content', 'files', 'createdAt', 'status']
+      attributes: ['id', 'content', 'files', 'createdAt', 'status'],
+      order: [['createdAt', 'desc']]
       // offset: (page - 1) * 15,
       // limit: 15
+    })
+  }
+
+  static findrecommendDiary(id: number) {
+    return DiaryModel.findAll({
+      raw: true,
+      where: {
+        id: {
+          [Op.ne]: id
+        },
+        permission: 1
+      },
+      include: [UserModel],
+      order: [['createdAt', 'desc']],
+      limit: 5
     })
   }
 }

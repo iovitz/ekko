@@ -1,11 +1,17 @@
 <template>
   <view class="diary-list">
     <DiaryItem
+      v-if="diaryStore.uploadingContent"
+      :id="null"
+      :timestamp="diaryStore.uploadingContent.timestamp"
+      :content="diaryStore.uploadingContent.content"
+      :files="null"
+    ></DiaryItem>
+    <DiaryItem
       v-for="(itm, idx) in diaryStore.myDiaryList"
       :key="idx"
       :timestamp="itm.createdAt"
       :content="itm.content"
-      :img="itm.files"
       :id="itm.id"
       :files="itm.files"
     ></DiaryItem>

@@ -18,7 +18,11 @@ export const useDiaryStore = defineStore({
         } | null
         createdAt: string
       }>,
-      uploadHandler: null as null | Promise<void>
+      uploadingContent: null as null | {
+        timestamp: number
+        content: string
+        permission: number
+      }
     }
   },
   actions: {
@@ -31,7 +35,14 @@ export const useDiaryStore = defineStore({
     },
     publishDiary(content: string, imgList: any[], isPublic: boolean) {
       const files: any[] = []
-      this.uploadHandler = getAliCloudKey()
+      const permission = isPublic ? 1 : 0
+      this.uploadingContent = {
+        permission,
+        content,
+        timestamp: Date.now()
+      }
+      console.log(this.uploadingContent)
+      getAliCloudKey()
         .then((res) => {
           const promisses = imgList.map((fileItem) => {
             return new Promise((success, fail) => {
@@ -56,18 +67,17 @@ export const useDiaryStore = defineStore({
             })
           })
           return Promise.all(promisses).then(() => {
-            return publishDiary(content, files, isPublic ? 1 : 0)
+            return publishDiary(content, files, permission).then((res) => {
+              this.myDiaryList.unshift(res)
+            })
           })
         })
         .then(() => {
-          this.uploadHandler = null
+          this.uploadingContent = null
         })
         .catch((e) => {
           if (e instanceof Error) {
-            this.uploadHandler = null
-            printer.error('上传失败', e.message)
-          } else {
-            printer.error('上传失败', e)
+            this.uploadingContent = null
           }
         })
     }

@@ -1,7 +1,7 @@
 <template>
-  <scroll-view scroll-y="true" class="touch-scroll" @scroll="handleScroll" :scroll-top="topDis">
+  <view class="touch-container">
     <view v-for="itm in touchData" :key="itm.id" class="scroll-view-item">{{ itm.id }} - {{ topDis }}</view>
-  </scroll-view>
+  </view>
 </template>
 <script setup lang="ts">
   import { ref } from 'vue'
@@ -30,23 +30,13 @@
     const { scrollHeight, scrollTop } = detail
     const itemHeight = scrollHeight / touchData.length
     topDis.value = Math.round(scrollTop / itemHeight) * itemHeight
-    console.log(Math.round(scrollTop / itemHeight) * itemHeight)
   }, 300)
 </script>
 <style lang="scss" scoped>
-  .touch-container {
-    height: 100%;
-  }
-  .index-swiper {
-    height: 400rpx;
-    .index-swiper-item {
-      background-color: #000;
-    }
-  }
   .touch-scroll {
     height: 100%;
   }
   .scroll-view-item {
-    height: 100%;
+    border-bottom: 4px solid balck;
   }
 </style>
