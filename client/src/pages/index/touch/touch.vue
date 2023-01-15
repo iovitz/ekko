@@ -1,11 +1,12 @@
 <template>
   <view class="touch-container">
-    <view v-for="itm in touchData" :key="itm.id" class="scroll-view-item">{{ itm.id }} - {{ topDis }}</view>
+    <touch-item v-for="itm in touchData" :key="itm.id" class="scroll-view-item"></touch-item>
   </view>
 </template>
 <script setup lang="ts">
   import { ref } from 'vue'
   import { debounce } from 'lodash'
+  import TouchItem from '@/common/components/touch-item/touch-item.vue'
 
   const touchData = [
     {
@@ -24,13 +25,6 @@
       id: 3
     }
   ]
-  const topDis = ref(0)
-
-  const handleScroll = debounce(({ detail }: any) => {
-    const { scrollHeight, scrollTop } = detail
-    const itemHeight = scrollHeight / touchData.length
-    topDis.value = Math.round(scrollTop / itemHeight) * itemHeight
-  }, 300)
 </script>
 <style lang="scss" scoped>
   .touch-scroll {
