@@ -5,7 +5,7 @@ import appConfig from './config/app_config'
 import { sequelize } from './model/mysql/mysql_connection'
 import { rootRouter } from './utils/koa_request/decorators'
 import { globalMiddleware } from './utils/middleware/global.middleware'
-import './model/mysql/relation_ship'
+import './model/mysql/relationship'
 import './controller'
 import { printer } from './utils/printer'
 

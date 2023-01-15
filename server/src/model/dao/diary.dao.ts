@@ -1,4 +1,4 @@
-import { Op } from 'sequelize'
+import { Op, col } from 'sequelize'
 import { DiaryModel } from '../mysql/model_define/diary'
 import { BaseDao } from './base.dao'
 import { UserModel } from '../mysql/model_define/users'
@@ -66,14 +66,21 @@ export class DiaryDao extends BaseDao {
 
   static findrecommendDiary(id: number) {
     return DiaryModel.findAll({
-      raw: true,
+      // raw: true,
       where: {
         id: {
           [Op.ne]: id
         },
+
         permission: 1
       },
-      include: [UserModel],
+      include: [
+        {
+          model: UserModel,
+          as: 'user',
+          attributes: ['nickname']
+        }
+      ],
       order: [['createdAt', 'desc']],
       limit: 5
     })

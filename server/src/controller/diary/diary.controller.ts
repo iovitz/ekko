@@ -1,4 +1,5 @@
 import { STS } from 'ali-oss'
+import { HistoryRecordDao } from '../../model/dao/history_record.dao'
 import { BaseController, Controller, KoaContext, KoaPostContext, Post } from '@/utils/koa_request'
 import appConfig from '@/config/app_config'
 import { diaryParamsSchema } from './schema'
@@ -67,5 +68,15 @@ export class DiaryController extends BaseController {
     const { id } = ctx.user
     const res = await DiaryDao.findrecommendDiary(id)
     ctx.body = res
+  }
+
+  @Post('/look_diary')
+  async lookDiary(ctx: KoaPostContext<{ did: number }>) {
+    const { id } = ctx.user
+    const { did } = ctx.request.body
+    if (!(await HistoryRecordDao.findRecord(id, did))) {
+      HistoryRecordDao.addRecord(id, did)
+    }
+    ctx.body = 'success'
   }
 }

@@ -59,6 +59,21 @@ CREATE TABLE `diary`  (
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(1) NULL DEFAULT 1,
   PRIMARY KEY (`id`),
-  CONSTRAINT `uid` FOREIGN KEY (`uid`) REFERENCES `touch_app`.`users` (`id`)
+  CONSTRAINT `uid` FOREIGN KEY (`uid`) REFERENCES `users` (`id`)
+);
+```
+
+## 历史记录表
+
+```sql
+DROP TABLE IF EXISTS `history_record`;
+CREATE TABLE `history_record`  (
+  `uid` smallint UNSIGNED NOT NULL,
+  `did` smallint UNSIGNED NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`uid`, `did`),
+  CONSTRAINT `userid` FOREIGN KEY (`uid`) REFERENCES `touch_app`.`users` (`id`),
+  CONSTRAINT `diaryid` FOREIGN KEY (`did`) REFERENCES `touch_app`.`diary` (`id`)
 );
 ```
