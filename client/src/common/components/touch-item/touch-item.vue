@@ -8,22 +8,10 @@
       </view>
     </view>
     <view class="touch-body">
-      <view class="touch-content">{{ props.content || '222222222222222222' }}</view>
-      <uni-grid :column="3">
-        <uni-grid-item>
-          <text class="text">文本</text>
-        </uni-grid-item>
-        <uni-grid-item>
-          <text class="text">文本</text>
-        </uni-grid-item>
-        <uni-grid-item>
-          <text class="text">文本</text>
-        </uni-grid-item>
-      </uni-grid>
+      <view class="touch-content">{{ props.content || '' }}</view>
       <view class="touch-options">
-        <view class="touch-options-item">10/30</view>
-        <view class="touch-options-item">喜欢</view>
-        <view class="touch-options-item">评论</view>
+        <view class="touch-options-item">喜欢{{ props.like }}</view>
+        <view class="touch-options-item">评论{{ props.commonCount }}</view>
       </view>
     </view>
   </view>
@@ -34,12 +22,12 @@
     avatar: string
     nickname: string
     content: string
-    file: {
+    files: {
       url: string
       type: string
-    }
+    }[]
     like: number
-    common: number
+    commonCount: number
   }>()
 </script>
 

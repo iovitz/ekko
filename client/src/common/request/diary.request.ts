@@ -41,7 +41,13 @@ export function getMyDiaryList(page: number) {
     })
 }
 
-export function getDiaryDetail(id: number) {
+export function getDiaryDetail() {
+  return commonRequest.post<any[]>('/diary/v1/get_recommend_diary').then((res) => {
+    return res.data
+  })
+}
+
+export function getRecommendDiary(id: number) {
   return commonRequest
     .post<{
       id: number

@@ -2,6 +2,7 @@ import { Op, col } from 'sequelize'
 import { DiaryModel } from '../mysql/model_define/diary'
 import { BaseDao } from './base.dao'
 import { UserModel } from '../mysql/model_define/users'
+import { sequelize } from '../mysql/mysql_connection'
 
 export class DiaryDao extends BaseDao {
   /**
@@ -64,25 +65,9 @@ export class DiaryDao extends BaseDao {
     })
   }
 
-  static findrecommendDiary(id: number) {
-    return DiaryModel.findAll({
-      // raw: true,
-      where: {
-        id: {
-          [Op.ne]: id
-        },
-
-        permission: 1
-      },
-      include: [
-        {
-          model: UserModel,
-          as: 'user',
-          attributes: ['nickname']
-        }
-      ],
-      order: [['createdAt', 'desc']],
-      limit: 5
-    })
+  static findrecommendDiary(uid: number) {
+    return sequelize.query(
+      `SELECT * FROM diary, history_record, users where diary.permission = 1 AND diary.uid != ${uid} AND diary.id != history_record.did AND diary.uid != history_record.uid AND users.id = diary.uid;`
+    )
   }
 }
