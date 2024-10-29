@@ -4,7 +4,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import { SocketIoAdapter } from './aspects/adaptors/socket.io.adaptor';
 import * as pkg from '../package.json';
-import * as session from 'express-session';
+
 import { TracerService } from './services/tracer/tracer.service';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
@@ -15,7 +15,6 @@ async function bootstrap() {
   });
 
   const rootTracer = app.get(TracerService);
-  const config = app.get(ConfigService);
 
   const appTracer = rootTracer.child('APP');
 
@@ -24,15 +23,6 @@ async function bootstrap() {
   appTracer.log('Application Running', {
     version: pkg.version,
   });
-
-  app.use(
-    session({
-      name: '__ss',
-      secret: config.getOrThrow('SESSION_SECRET'),
-      resave: false,
-      saveUninitialized: false,
-    }),
-  );
 
   const configService = app.get(ConfigService);
 
