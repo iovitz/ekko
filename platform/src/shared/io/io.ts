@@ -1,5 +1,6 @@
-import axios, { AxiosInstance, AxiosRequestConfig, CreateAxiosDefaults } from 'axios'
-import { FeSocket } from './socket'
+import type { AxiosInstance, AxiosRequestConfig, CreateAxiosDefaults } from 'axios'
+import type { FeSocket } from './socket'
+import axios from 'axios'
 
 type ErrorHandler = (data: unknown) => unknown
 
@@ -25,9 +26,8 @@ export class HttpClient {
     this.errorHandler.delete(handler)
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   request<T = any>(config: AxiosRequestConfig) {
-    return this.axios.request(config).catch(e => {
+    return this.axios.request(config).catch((e) => {
       this.errorHandler.forEach(fn => fn(e))
       throw e
     }) as unknown as Promise<T>

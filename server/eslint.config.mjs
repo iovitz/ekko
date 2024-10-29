@@ -4,12 +4,14 @@ import tseslint from 'typescript-eslint'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
 export default tseslint.config(
-  { ignores: ['dist', 'node_modules'] },
+  {
+      ignores: ['**/node_modules', '**/dist', '**/output']
+  },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended, eslintPluginPrettierRecommended],
     files: ['**/*.{js,ts,tsx}', 'main.tsx'],
     languageOptions: {
-      ecmaVersion: 2020,
+      ecmaVersion: 'latest',
       globals: globals.browser
     },
     rules: {

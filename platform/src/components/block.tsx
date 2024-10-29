@@ -5,7 +5,7 @@ export default function Block(props: { children: JSX.Element }) {
   return (
     <Card
       style={{
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
       }}
     >
       <Card.Body>{props.children}</Card.Body>

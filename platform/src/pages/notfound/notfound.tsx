@@ -6,11 +6,12 @@ export default function NotFound() {
   const { t } = useTranslation()
   return (
     <>
-      <NavBar title={t('page-name.not-found')} leftArrow={false} />{' '}
+      <NavBar title={t('page-name.not-found')} leftArrow={false} />
+      {' '}
       <Empty
         description={t('notfound.page-no-content')}
         style={{
-          textAlign: 'center'
+          textAlign: 'center',
         }}
       >
         <Space>
