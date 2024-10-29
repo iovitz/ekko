@@ -1,5 +1,0 @@
-packages:
-  # 客户端
-  - 'client'
-  # 服务端
-  - 'server'
