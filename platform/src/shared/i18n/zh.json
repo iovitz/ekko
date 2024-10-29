@@ -1,0 +1,33 @@
+{
+  "page-name": {
+    "dashboard": "仪表盘",
+    "todos": "待办",
+    "mine": "我的",
+    "login": "登录",
+    "not-found": "页面不存在"
+  },
+  "pages": {
+    "dashboard": {
+      "month-expenses": "本月支出",
+      "month-income": "本月收入",
+      "month-balance": "本月结余"
+    },
+    "login": {
+      "login": "立即登录",
+      "register": "立即注册",
+      "input-your-email": "请输入你的注册邮箱",
+      "input-your-password": "请输入你的密码",
+      "input-your-code": "请输入验证码"
+    }
+  },
+  "common": {
+    "email": "邮箱",
+    "password": "密码",
+    "verify-code": "验证码",
+    "contact-us": "联系我们"
+  },
+  "notfound": {
+    "back-to-dashboard": "返回主页",
+    "page-no-content": "当前页面没有数据，如果您认为这是BUG，请进行反馈"
+  }
+}
