@@ -1,5 +1,5 @@
 import { http } from '@/shared/io/io'
-import React, { useRef, useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 interface Props {
   type: string
@@ -20,8 +20,8 @@ export default function VerifyCode(props: Props) {
       params: {
         height,
         width,
-        type: props.type
-      }
+        type: props.type,
+      },
     })
     if (svgContainer.current) {
       svgContainer.current.innerHTML = data
@@ -41,7 +41,7 @@ export default function VerifyCode(props: Props) {
       onClick={refreshCode}
       className="w-full h-full flex-1 text-xs"
       style={{
-        minHeight: '50px'
+        minHeight: '50px',
       }}
     />
   )

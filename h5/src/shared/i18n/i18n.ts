@@ -1,13 +1,13 @@
 import i18n from 'i18next'
-import { initReactI18next } from 'react-i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
+import { initReactI18next } from 'react-i18next'
 // import Backend from 'i18next-http-backend'
 import translation_zh from './zh.json'
 
 const resources = {
   zh: {
-    translation: translation_zh
-  }
+    translation: translation_zh,
+  },
 }
 
 i18n
@@ -24,11 +24,10 @@ i18n
     // supportedLngs: Object.keys(resources),
     // fallbackLng: 'en',
     interpolation: {
-      escapeValue: false
-    }
+      escapeValue: false,
+    },
   })
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 ;(window as any).t = function t(key: string) {
   return i18n.t(key)
 }
