@@ -1,8 +1,11 @@
+import { homedir } from 'node:os'
+import { join } from 'node:path'
 import * as process from 'node:process'
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core'
 import { EventEmitterModule } from '@nestjs/event-emitter'
+import { TypeOrmModule } from '@nestjs/typeorm'
 import * as cookieParser from 'cookie-parser'
 import * as session from 'express-session'
 import { DefaultFilter } from './aspects/filters/default/default.filter'
@@ -11,7 +14,6 @@ import { LogInterceptor } from './aspects/interceptors/log/log.interceptor'
 import { PreparePromiseInterceptor } from './aspects/interceptors/prepare-promise/prepare-promise.interceptor'
 import { ResponseFormatterInterceptor } from './aspects/interceptors/response-formatter/response-formatter.interceptor'
 import { InjectorMiddleware } from './aspects/middlewares/injector/injector.middleware'
-import { DbModule } from './db/db.module'
 import { ServicesModule } from './services/services.module'
 import { TracerService } from './services/tracer/tracer.service'
 import { SocketV1Module } from './socketv1/socketv1.module'
@@ -24,31 +26,44 @@ import { UserModule } from './user/user.module'
       envFilePath: [
         '.env', // 默认配置文件
         // 选择配置类型
-        ['prod', 'pre'].includes(process.env.APP_NAME_NODE_ENV)
-          ? '.env.prod'
-          : '.env.dev', // 环境配置文件
+        ['production'].includes(process.env.APP_NAME_NODE_ENV)
+          ? '.env.production'
+          : '.env.development',
       ],
       load: [
         // 可以加载远程配置
         async () => {
-          const isProd = process.env.NODE_ENV === 'prod'
-          const isPre = process.env.NODE_ENV === 'pre'
-          const isDev = process.env.NODE_ENV === 'dev'
-          const isOnline = isProd || isPre
+          const isProd = process.env.NODE_ENV === 'production'
 
           return {
             isProd,
-            isPre,
-            isDev,
-            isOnline,
-            ...process.env,
           }
         },
       ],
     }),
+
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (config: ConfigService) => {
+        const isProd = config.get('isProd')
+        return {
+          type: 'better-sqlite3',
+
+          // 数据放在 ~/sqlite 目录下
+          database: join(homedir(), 'sqlite', 'ekko.sqlite'),
+
+          // 按需启动
+          synchronize: false,
+          logging: !isProd,
+
+          entities: [`${__dirname}/**/*.entity{.ts,.js}`], // 这个实体是编译后的dist下
+          timezone: '+08:00',
+        }
+      },
+      inject: [ConfigService],
+    }),
     ServicesModule,
     EventEmitterModule.forRoot(),
-    DbModule,
     SocketV1Module,
     UserModule,
   ],
