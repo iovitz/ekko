@@ -1,10 +1,12 @@
 import { homedir } from 'node:os'
 import { join } from 'node:path'
 import * as process from 'node:process'
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core'
 import { EventEmitterModule } from '@nestjs/event-emitter'
+import { GraphQLModule } from '@nestjs/graphql'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import * as cookieParser from 'cookie-parser'
 import * as session from 'express-session'
@@ -14,6 +16,7 @@ import { LogInterceptor } from './aspects/interceptors/log/log.interceptor'
 import { PreparePromiseInterceptor } from './aspects/interceptors/prepare-promise/prepare-promise.interceptor'
 import { ResponseFormatterInterceptor } from './aspects/interceptors/response-formatter/response-formatter.interceptor'
 import { InjectorMiddleware } from './aspects/middlewares/injector/injector.middleware'
+import { GraphqlModule } from './graphql/graphql.module'
 import { ServicesModule } from './services/services.module'
 import { TracerService } from './services/tracer/tracer.service'
 import { SocketV1Module } from './socketv1/socketv1.module'
@@ -41,7 +44,6 @@ import { UserModule } from './user/user.module'
         },
       ],
     }),
-
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (config: ConfigService) => {
@@ -66,6 +68,7 @@ import { UserModule } from './user/user.module'
     EventEmitterModule.forRoot(),
     SocketV1Module,
     UserModule,
+    GraphqlModule,
   ],
   providers: [
     {
