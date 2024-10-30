@@ -16,7 +16,6 @@ import { LogInterceptor } from './aspects/interceptors/log/log.interceptor'
 import { PreparePromiseInterceptor } from './aspects/interceptors/prepare-promise/prepare-promise.interceptor'
 import { ResponseFormatterInterceptor } from './aspects/interceptors/response-formatter/response-formatter.interceptor'
 import { InjectorMiddleware } from './aspects/middlewares/injector/injector.middleware'
-import { GraphqlModule } from './graphql/graphql.module'
 import { ServicesModule } from './services/services.module'
 import { TracerService } from './services/tracer/tracer.service'
 import { SocketV1Module } from './socketv1/socketv1.module'
@@ -44,6 +43,14 @@ import { UserModule } from './user/user.module'
         },
       ],
     }),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: true,
+
+      // playground访问
+      playground: true,
+      path: 'graphql/playground',
+    }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (config: ConfigService) => {
@@ -58,6 +65,7 @@ import { UserModule } from './user/user.module'
           synchronize: false,
           logging: !isProd,
 
+          // eslint-disable-next-line node/no-path-concat
           entities: [`${__dirname}/**/*.entity{.ts,.js}`], // 这个实体是编译后的dist下
           timezone: '+08:00',
         }
@@ -68,7 +76,6 @@ import { UserModule } from './user/user.module'
     EventEmitterModule.forRoot(),
     SocketV1Module,
     UserModule,
-    GraphqlModule,
   ],
   providers: [
     {
