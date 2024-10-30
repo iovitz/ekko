@@ -3,8 +3,8 @@ import {
   ExecutionContext,
   Injectable,
   NestInterceptor,
-} from '@nestjs/common';
-import { Observable } from 'rxjs';
+} from '@nestjs/common'
+import { Observable } from 'rxjs'
 
 @Injectable()
 export class PreparePromiseInterceptor implements NestInterceptor {
@@ -12,6 +12,6 @@ export class PreparePromiseInterceptor implements NestInterceptor {
     // PreparePromise
     // const req = context.switchToHttp().getRequest<Req>();
     // req.promiseManager;
-    return next.handle();
+    return next.handle()
   }
 }
