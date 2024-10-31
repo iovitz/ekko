@@ -18,7 +18,6 @@ import { ResponseFormatterInterceptor } from './aspects/interceptors/response-fo
 import { InjectorMiddleware } from './aspects/middlewares/injector/injector.middleware'
 import { ServicesModule } from './services/services.module'
 import { TracerService } from './services/tracer/tracer.service'
-import { SocketV1Module } from './socketv1/socketv1.module'
 import { UserModule } from './user/user.module'
 
 @Module({
@@ -43,14 +42,6 @@ import { UserModule } from './user/user.module'
         },
       ],
     }),
-    GraphQLModule.forRoot<ApolloDriverConfig>({
-      driver: ApolloDriver,
-      autoSchemaFile: true,
-
-      // playground访问
-      playground: true,
-      path: 'graphql/playground',
-    }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (config: ConfigService) => {
@@ -65,16 +56,23 @@ import { UserModule } from './user/user.module'
           synchronize: false,
           logging: !isProd,
 
-          // eslint-disable-next-line node/no-path-concat
-          entities: [`${__dirname}/**/*.entity{.ts,.js}`], // 这个实体是编译后的dist下
+          entities: [
+            // eslint-disable-next-line node/no-path-concat
+            `${__dirname}/../**/*.entity{.ts,.js}`,
+          ],
           timezone: '+08:00',
         }
       },
       inject: [ConfigService],
     }),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: true,
+
+      path: '/graphql',
+    }),
     ServicesModule,
     EventEmitterModule.forRoot(),
-    SocketV1Module,
     UserModule,
   ],
   providers: [

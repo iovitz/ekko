@@ -22,6 +22,7 @@ export class User {
 
   @Column({
     comment: 'MD5密码',
+    select: false,
   })
   password: string
 
